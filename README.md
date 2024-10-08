@@ -1,2 +1,13 @@
-# Diseno-de-Interfaces-Usuarias-INF-322
-Munidenuncia es la interfaz de usuario que permite a los ciudadanos realizar denuncias de manera sencilla y rápida sobre problemas o incidentes
+# MuniDenuncia (Front-end)
+
+**Munidenuncia** es la interfaz de usuario que permite a los ciudadanos realizar denuncias de manera sencilla y rápida sobre problemas o incidentes en sus comunidades, directamente a las municipalidades. Este repositorio contiene únicamente el código del front-end, que está diseñado para facilitar la interacción con la plataforma y mejorar la experiencia del usuario.  
+
+## Características:
+- **Facil de Usar** para la creación y seguimiento de denuncias.
+- **Geolocalización** para reportar con precisión la ubicación del incidente.
+- **Notificaciones en tiempo real** para informar a los usuarios sobre el estado de sus denuncias.
+- **Historial de denuncias** para acceder a reportes anteriores y analizar tendencias.
+
+Este proyecto se centra en la participación ciudadana y está pensado para integrarse con un back-end que maneje la gestión y respuesta de las municipalidades.
+
+2024-2
