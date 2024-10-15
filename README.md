@@ -1,6 +1,6 @@
 # MuniDenuncia (Frontend)
 
-**MuniDenuncia** es la interfaz de usuario que permite a los ciudadanos realizar denuncias de manera sencilla y rápida sobre problemas o incidentes en sus comunidades, directamente a las municipalidades. Este repositorio contiene únicamente el código del front-end, que está diseñado para facilitar la interacción con la plataforma y mejorar la experiencia del usuario.
+**MuniDenuncia** es una aplicacion que permite a los ciudadanos realizar denuncias de manera sencilla y rápida sobre problemas o incidentes en sus comunidades, directamente a las municipalidades. Este repositorio contiene únicamente el código del front-end, que está diseñado para facilitar la interacción con la plataforma y mejorar la experiencia del usuario.
 
 ## Características:
 - **Fácil de Usar** para la creación y seguimiento de denuncias.
