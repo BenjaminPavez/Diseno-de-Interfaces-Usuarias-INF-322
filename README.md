@@ -1,3 +1,6 @@
+> [!NOTE]  
+> Ultima Version en Rama master.
+> 
 # ![MuniDenuncia](https://github.com/user-attachments/assets/65d5e61c-74d9-4571-83c1-ba76e6b0ce91) MuniDenuncia (Frontend)
 
 
