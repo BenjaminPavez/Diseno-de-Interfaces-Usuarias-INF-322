@@ -1,0 +1,38 @@
+.layout_footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #76a6e97e;
+    height: 300px;
+
+    img {
+        height: 70px;
+        width: 70px;
+    }
+
+    .footer{
+        color: #ffffff;;
+        font-size: 17pt;
+    
+    }
+
+    .nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 10px;
+        color: #000000;
+    }
+
+    .redes{
+        height: 30px;
+        width: 40px;
+    }
+
+    .redesig{
+        height: 30px;
+        width: 50px;
+    }
+
+    
+}
