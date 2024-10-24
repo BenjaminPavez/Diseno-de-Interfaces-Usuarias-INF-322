@@ -19,45 +19,45 @@ export const Footer = () => {
         </div>
         <nav className='nav'>
             <ul >
-                <li class="title">Siguenos</li>
+                <li className="title">Siguenos</li>
                 <img className='redesig' src={ig} alt='redesig' />
                 <img className='redes' src={fb} alt='redes' />
                 <img className='redes' src={tw} alt='redes' />
             </ul>
             <ul>
-                <li class="title">MuniDenuncia</li>
+                <li className="title">MuniDenuncia</li>
                 <li><a href="/denuncias">Denuncias</a></li>
                 <li><a href="/denuncias/reportar">Reportar Denuncia</a></li>
                 <li><a href="/denuncias/estado">Estado de Denuncias</a></li>
                 <li><a href="/denuncias/historial">Historial de Denuncias</a></li>
             </ul>
             <ul>
-                <li class="title">Acerca de</li>
+                <li className="title">Acerca de</li>
                 <li><a href="/acerca">Acerca de MuniDenuncia</a></li>
                 <li><a href="/acerca/funcionamiento">Cómo Funciona</a></li>
                 <li><a href="/acerca/privacidad">Política de Privacidad</a></li>
                 <li><a href="/acerca/terminos">Términos de Uso</a></li>
             </ul>
             <ul>
-                <li class="title">Servicios Municipales</li>
+                <li className="title">Servicios Municipales</li>
                 <li><a href="/servicios">Servicios Públicos</a></li>
                 <li><a href="/servicios/horarios">Horarios de Atención</a></li>
                 <li><a href="/servicios/ubicacion">Ubicación de Oficinas</a></li>
             </ul>
             <ul>
-                <li class="title">Comunidad</li>
+                <li className="title">Comunidad</li>
                 <li><a href="/comunidad/foro">Foro Ciudadano</a></li>
                 <li><a href="/comunidad/eventos">Eventos Locales</a></li>
                 <li><a href="/comunidad/voluntariado">Oportunidades de Voluntariado</a></li>
             </ul>
             <ul>
-                <li class="title">Seguridad</li>
+                <li className="title">Seguridad</li>
                 <li><a href="/seguridad">Información de Seguridad</a></li>
                 <li><a href="/seguridad/policia">Contactar a la Policía</a></li>
                 <li><a href="/seguridad/emergencias">Números de Emergencia</a></li>
             </ul>
             <ul>
-                <li class="title">Contacto</li>
+                <li className="title">Contacto</li>
                 <li><a href="/contacto">Contáctanos</a></li>
                 <li><a href="/contacto/soporte">Soporte Técnico</a></li>
                 <li><a href="/contacto/sugerencias">Enviar Sugerencias</a></li>
