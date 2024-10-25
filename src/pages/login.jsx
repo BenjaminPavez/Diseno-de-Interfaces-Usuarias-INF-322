@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
+    const navigate = useNavigate(); // Hook para redirigir
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -10,12 +12,21 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            //e.target.email == "test@test.cl"
-            //e.target.name == "user"
-            console.log("Exitoso");
-        } catch (error) {
-            console.log(error);
+
+        const { email, password } = formData;
+
+        // Validacion con usuario de prueba
+        if (email === 'test@test.cl' && password === '123') {
+            toast.success("Inicio de sesión exitoso", {
+              duration: 1500,
+            })
+            // manda a home page
+            navigate('/');
+        } else {
+          toast.error('Credenciales incorrectas',{
+            duration: 1500,
+          });
+          console.error("Error con credenciales");
         }
     };
 

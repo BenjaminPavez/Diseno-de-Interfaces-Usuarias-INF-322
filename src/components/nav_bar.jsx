@@ -25,7 +25,7 @@ export const NavBar = () => {
         className={navLinkClass}
         to='/login'
       >
-        Login
+        Cerrar Sesión
       </NavLink>
     </nav>
   )
