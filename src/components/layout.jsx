@@ -11,8 +11,8 @@ import Footer from './footer'
 const Layout = () => {
   return (
     <BrowserRouter>
+    <Header />
       <div className='layout'>
-        <Header />
         <NavBar />
         <div className='layout__page'>
           <Routes>

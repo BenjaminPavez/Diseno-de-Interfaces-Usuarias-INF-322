@@ -7,8 +7,11 @@
 @import './footer/index.scss';
 
 html, body {
+  height: 100%;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 * {
