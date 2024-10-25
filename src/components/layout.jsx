@@ -17,13 +17,16 @@ const Layout = () => {
   // Esto es para saber si estamos en login o no y ocultar header y footer
   const hideHeaderFooter = location.pathname === '/login';
 
+  //pageClass le añade otro estilo a login-page
+  const pageClass = hideHeaderFooter ? 'login-container' : 'layout__page';
+
   return (
     <div className='layout'>
       <Toaster />
       {!hideHeaderFooter && <Header />}
       {!hideHeaderFooter && <NavBar />}
 
-      <div className='layout__page'>
+      <div className={pageClass}>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/lightbulb' element={<LightbulbPage />} />
