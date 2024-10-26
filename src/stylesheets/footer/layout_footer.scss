@@ -1,9 +1,11 @@
 .layout_footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: #76a6e97e;
     height: 300px;
+    //border-top: 2px solid rgba(0, 0, 0, 0.24);  //Borde
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 
     img {
         height: 70px;
@@ -20,8 +22,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-right: 10px;
         color: #000000;
+        margin-right: 10px;
     }
 
     .redes{

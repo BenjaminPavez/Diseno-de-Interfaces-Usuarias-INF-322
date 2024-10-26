@@ -14,10 +14,9 @@ export const Footer = () => {
             <h1 className='footer'>MuniDenuncia</h1>
             <h1 className='footer2'>MuniDenuncia es una aplicación diseñada para facilitar la denuncia ciudadana ante las municipalidades. 
                 Permite a los usuarios reportar problemas o incidentes en su comunidad de forma rápida y eficiente, mejorando la comunicación y resolución de los problemas 
-                locales.</h1>
-            
-        </div>
-        <nav className='nav'>
+                locales.
+            </h1>
+            <nav className='nav'>
             <ul >
                 <li className="title">Siguenos</li>
                 <img className='redesig' src={ig} alt='redesig' />
@@ -63,6 +62,9 @@ export const Footer = () => {
                 <li><a href="/contacto/sugerencias">Enviar Sugerencias</a></li>
             </ul>
         </nav>
+            
+        </div>
+        
 
     </footer>
   )
