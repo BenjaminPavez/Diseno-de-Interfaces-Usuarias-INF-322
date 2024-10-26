@@ -39,9 +39,11 @@ const Layout = () => {
 };
 
 const App = () => (
-  <BrowserRouter>
-    <Layout />
-  </BrowserRouter>
+  <div className="phone-simulator">
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  </div>
 );
 
 export default App;
