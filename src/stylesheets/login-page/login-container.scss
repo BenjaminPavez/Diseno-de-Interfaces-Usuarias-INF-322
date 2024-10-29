@@ -1,7 +1,9 @@
 .login-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  height: 70vh;
+  padding: 9.3vh; //Arreglar esto, es muy dependiente de padding
   background-color: $light-background;
 }
