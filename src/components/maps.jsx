@@ -1,48 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useNavigate } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
 import { leerDesdeLocalStorage } from '../components/fileUtils';
 
-//Aqui se importan los iconos personalizados
-
-import warningIcon from "../assets/advertencia.png";
-import pinAuto from "../assets/pin_auto.png";
-import pinLadron from "../assets/pin_ladron.png";
-import pinPoste from "../assets/pin_poste.png";
-import pinSemaforo from "../assets/pin_semaforo.png";
-import pinFuego from "../assets/pin_fuego.png";
+import warningIcon from "../assets/megafono.png";
 import iconAuto from "../assets/icon_auto.png";
-import iconFuego from "../assets/icon_fuego.png";
 import iconLadron from "../assets/icon_ladron.png";
 import iconPoste from "../assets/icon_poste.png";
 import iconSemaforo from "../assets/icon_semaforo.png";
 
 const icons2 = {
-  auto: new L.Icon({ iconUrl: iconAuto, iconSize: [32, 32], iconAnchor: [32, 32] }),
-  ladron: new L.Icon({ iconUrl: iconLadron, iconSize: [32, 32], iconAnchor: [32, 32] }),
-  poste: new L.Icon({ iconUrl: iconPoste, iconSize: [32, 32], iconAnchor: [32, 32] }),
-  semaforo: new L.Icon({ iconUrl: iconSemaforo, iconSize: [32, 32], iconAnchor: [32, 32] }),
-  fuego: new L.Icon({ iconUrl: iconFuego, iconSize: [32, 32], iconAnchor: [32, 32] }),
+  auto: new L.Icon({ iconUrl: iconAuto, iconSize: [32, 32], iconAnchor: [16, 16] }),
+  ladron: new L.Icon({ iconUrl: iconLadron, iconSize: [32, 32], iconAnchor: [16, 16] }),
+  poste: new L.Icon({ iconUrl: iconPoste, iconSize: [32, 32], iconAnchor: [16, 16] }),
+  semaforo: new L.Icon({ iconUrl: iconSemaforo, iconSize: [32, 32], iconAnchor: [16, 16] }),
 };
 
-//Se mapea cada icono personalizado
 const icons = {
-  auto: new L.Icon({ iconUrl: pinAuto, iconSize: [32, 32], iconAnchor: [16, 32] }),
-  ladron: new L.Icon({ iconUrl: pinLadron, iconSize: [32, 32], iconAnchor: [16, 32] }),
-  poste: new L.Icon({ iconUrl: pinPoste, iconSize: [32, 32], iconAnchor: [16, 32] }),
-  semaforo: new L.Icon({ iconUrl: pinSemaforo, iconSize: [32, 32], iconAnchor: [16, 32] }),
-  fuego: new L.Icon({ iconUrl: pinFuego, iconSize: [32, 32], iconAnchor: [16, 32] }),
+  auto: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconAuto}" class="icon" alt="Auto Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+  ladron: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconLadron}" class="icon" alt="Ladron Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+  poste: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconPoste}" class="icon" alt="Poste Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+  semaforo: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconSemaforo}" class="icon" alt="Semaforo Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
 };
-
-const locations = [
-  { id: 1, lat: -33.5027, lng: -70.6132, type: "semaforo" },
-  { id: 2, lat: -33.5031, lng: -70.6115, type: "ladron" },
-  { id: 3, lat: -33.5042, lng: -70.6141, type: "auto" },
-  { id: 4, lat: -33.5008, lng: -70.6127, type: "poste" },
-  { id: 5, lat: -33.5015, lng: -70.6152, type: "fuego" },
-];
 
 function AddMarkers() {
   const map = useMap();
@@ -50,6 +51,13 @@ function AddMarkers() {
   const locations = leerDesdeLocalStorage();
 
   useEffect(() => {
+    // Limpia todos los marcadores existentes antes de añadir nuevos
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        map.removeLayer(layer);
+      }
+    });
+
     locations.forEach((location) => {
       const icon = icons[location.type] || icons["default"];
       L.marker([location.lat, location.lng], { icon: icon })
@@ -63,11 +71,19 @@ function AddMarkers() {
 
 function Maps() {
   const [showIcons, setShowIcons] = useState(false);
-  const [currentPosition, setCurrentPosition] = useState([-33.5027, -70.6132]); // Posición inicial
+  const [currentPosition, setCurrentPosition] = useState([-33.5027, -70.6132]);
   const navigate = useNavigate();
 
   const handleMapMoveEnd = (map) => {
-    setCurrentPosition(map.getCenter()); // Actualiza posición cuando se mueve el mapa
+    setCurrentPosition(map.getCenter());
+  };
+
+  const handleIconClick = (type) => {
+    navigate(`/NuevaAdvertencia/${type}`, { state: { currentPosition } });
+  };
+
+  const toggleIcons = () => {
+    setShowIcons((prev) => !prev);
   };
 
   return (
@@ -85,28 +101,23 @@ function Maps() {
       />
       <AddMarkers />
       <div className="warnings-button-container">
-        {showIcons ? (
+        {showIcons && (
           <div className="warnings-icons">
             {Object.keys(icons).map((type) => (
               <img
                 key={type}
                 src={icons2[type].options.iconUrl}
                 alt={type}
-                onClick={() => navigate(`/NuevaAdvertencia/${type}`, {
-                  state: { currentPosition }
-                })}
+                onClick={() => handleIconClick(type)}
                 className="warning-icon"
               />
             ))}
           </div>
-        ) : (
-          <img
-            src={warningIcon}
-            alt="Advertencia"
-            onClick={() => setShowIcons(true)}
-            className="warning-button"
-          />
         )}
+        <div className="warning-icon-container" onClick={toggleIcons}>
+          <img src={warningIcon} alt="Advertencia" className="warning-icon" />
+          <div className="warning-label">Denuncia</div>
+        </div>
       </div>
     </MapContainer>
   );
