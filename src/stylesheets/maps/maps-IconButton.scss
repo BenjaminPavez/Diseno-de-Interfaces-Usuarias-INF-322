@@ -1,0 +1,54 @@
+.warnings-button-container {
+  position: absolute;
+  bottom: 20px;
+  right: 0.1px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.warning-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+}
+
+.warning-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.warning-label {
+  font-size: 18px; // Ajusta el tamaño de fuente según prefieras
+  color: #fcfcfc;
+  font-weight: bold;
+  margin-top: 4px;
+  text-shadow: 
+    -1px -1px 0 #000,
+     1px -1px 0 #000, 
+    -1px 1px 0 #000,  
+     1px 1px 0 #000;  
+}
+
+.warnings-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.warning-icon {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #76A6E9;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
