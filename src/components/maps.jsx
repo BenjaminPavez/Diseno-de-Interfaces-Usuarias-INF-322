@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useNavigate } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
-import '../stylesheets/maps.scss';
 import { leerDesdeLocalStorage } from '../components/fileUtils';
 
 //Aqui se importan los iconos personalizados
@@ -75,7 +74,7 @@ function Maps() {
     <MapContainer
       center={currentPosition}
       zoom={16}
-      style={{ height: "500px", width: "100%" }}
+      style={{ height: "650px", width: "100%" }}
       whenCreated={(map) => {
         map.on("moveend", () => handleMapMoveEnd(map));
       }}

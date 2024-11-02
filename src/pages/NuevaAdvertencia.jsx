@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet';
 import { guardarEnLocalStorage, leerDesdeLocalStorage } from '../components/fileUtils';
-import '../stylesheets/NuevaAdvertencia.scss';
 import L from "leaflet";
 
 import pinAuto from "../assets/pin_auto.png";

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../stylesheets/detalle.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { leerDesdeLocalStorage, eliminarDeLocalStorage } from '../components/fileUtils';
 
@@ -15,7 +14,7 @@ function Detalle() {
 
   const handleDelete = () => {
     eliminarDeLocalStorage(locationDetail.id);
-    navigate("/maps"); // Redirige al usuario después de eliminar
+    navigate("/"); // Redirige al usuario después de eliminar
   };
 
   return (
