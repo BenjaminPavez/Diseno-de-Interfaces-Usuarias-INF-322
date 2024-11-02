@@ -1,34 +1,34 @@
 .advertencia-form {
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #A5BBD9;
+    border-radius: 5px;
     max-width: 500px;
-    margin: 20px auto;
+    margin: 1px auto;
     font-family: Arial, sans-serif;
+    
   
     &__title {
       font-size: 24px;
       font-weight: bold;
       color: #333;
-      margin-bottom: 20px;
       text-align: center;
     }
   
     &__label {
       display: block;
       font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
+      color: white;
+      margin-bottom: 5px;
       font-weight: bold;
+      text-shadow: 
+      -0.2px -1px 0 #000,
+       1px -1px 0 #000, 
+      -1px 1px 0 #000,  
+       1px 1px 0 #000; 
     }
   
     &__input,
     &__textarea {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      margin-bottom: 20px;
       border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 16px;
@@ -37,7 +37,6 @@
   
     &__textarea {
       resize: vertical;
-      height: 80px;
     }
   
     &__button {
@@ -45,7 +44,7 @@
       padding: 10px;
       font-size: 16px;
       font-weight: bold;
-      background-color: #76A6E9;
+      background-color: #34C759;
       color: white;
       border: none;
       border-radius: 5px;
@@ -53,7 +52,26 @@
       transition: background-color 0.3s;
   
       &:hover {
-        background-color: #5b8ed6;
+        background-color: #258d3f;
       }
+    }
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    &__button--cancel {
+      background-color: #FF3B30;
+      color: white;
+      width: calc(50% - 5px); 
+      
+      &:hover {
+        background-color: #da3229;
+      }
+    }
+    
+    &__button {
+      width: calc(50% - 5px); 
+      margin-left: 1px;
     }
   }

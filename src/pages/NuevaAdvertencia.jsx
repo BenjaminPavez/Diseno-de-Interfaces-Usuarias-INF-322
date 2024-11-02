@@ -9,7 +9,6 @@ import iconLadron from "../assets/icon_ladron.png";
 import iconPoste from "../assets/icon_poste.png";
 import iconSemaforo from "../assets/icon_semaforo.png";
 
-// Reutilizar los mismos estilos de pines de Maps.jsx
 const icons = {
   auto: new L.DivIcon({
     className: "pin",
@@ -39,13 +38,19 @@ const icons = {
 
 function NuevaAdvertencia() {
   const { type: initialType } = useParams();
+  const [selectedType, setSelectedType] = useState(initialType);
   const { state } = useLocation();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("bajo");
   const [position, setPosition] = useState(state?.currentPosition);
-  const [type, setType] = useState(initialType); // Nuevo estado para el tipo seleccionado
+  const [type, setType] = useState(initialType);
   const navigate = useNavigate();
+
+  const handleIconClick = (newType) => {
+    setSelectedType(newType);
+    setType(newType); 
+  };
 
   const handleAddLocation = (e) => {
     e.preventDefault();
@@ -67,6 +72,10 @@ function NuevaAdvertencia() {
     navigate("/");
   };
 
+  const handleCancel = () => {
+    navigate("/");
+  };
+
   const MapEvents = () => {
     const map = useMapEvents({
       moveend: () => {
@@ -78,11 +87,9 @@ function NuevaAdvertencia() {
   };
 
   return (
-    <form onSubmit={handleAddLocation} className="advertencia-form">
-      <h2 className="advertencia-form__title">Reportar {type}</h2>
-      
-      {/* Mapa con el pin seleccionado */}
-      <MapContainer center={position} zoom={16} style={{ height: "300px", width: "100%", marginBottom: "20px" }}>
+    <form onSubmit={handleAddLocation} className="advertencia-form">  
+      <label className="advertencia-form__label">Ubicación</label>
+      <MapContainer center={position} zoom={16} style={{ height: "300px", width: "300px", marginBottom: "20px" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -90,23 +97,18 @@ function NuevaAdvertencia() {
         <Marker position={position} icon={icons[type]} />
         <MapEvents />
       </MapContainer>
-      {/* Selección de iconos en una fila horizontal */}
+      <label className="advertencia-form__label">Tipo de denuncia</label>
       <div className="icon-selection">
-        {Object.entries(icons).map(([key, icon]) => (
-          <div 
-            key={key} 
-            className={`icon-container ${key === type ? 'selected' : ''}`} 
-            onClick={() => setType(key)}
+        {Object.keys(icons).map((iconType) => (
+          <div
+            key={iconType}
+            onClick={() => handleIconClick(iconType)}
+            className={`icon-container ${selectedType === iconType ? "selected" : ""}`}
           >
-            <img src={icon.options.html.match(/src="([^"]+)"/)[1]} alt={`${key} Icon`} className="icon-image" />
+            <img src={icons[iconType].options.html.match(/src="([^"]+)"/)[1]} alt={`${iconType} icon`} className="icon-image" />
           </div>
         ))}
       </div>
-
-      {/* Formulario de datos */}
-      <label className="advertencia-form__label">Título:
-        <input value={title} onChange={(e) => setTitle(e.target.value)} className="advertencia-form__input" />
-      </label>
       <label className="advertencia-form__label">Descripción:
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="advertencia-form__textarea" />
       </label>
@@ -118,7 +120,10 @@ function NuevaAdvertencia() {
         </select>
       </label>
       
-      <button type="submit" className="advertencia-form__button">Añadir al mapa</button>
+      <div className="advertencia-form__buttons">
+        <button type="button" onClick={handleCancel} className="advertencia-form__button advertencia-form__button--cancel">Cancelar</button>
+        <button type="submit" className="advertencia-form__button">Publicar</button>
+      </div>
     </form>
   );
 }
