@@ -90,7 +90,7 @@ function Maps() {
     <MapContainer
       center={currentPosition}
       zoom={16}
-      style={{ height: "650px", width: "100%" }}
+      style={{ height: "692px", width: "100%" }}
       whenCreated={(map) => {
         map.on("moveend", () => handleMapMoveEnd(map));
       }}
