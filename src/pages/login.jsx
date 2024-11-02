@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import MuniLogo from '../assets/icono.png'
 
 const Login = () => {
-    const [formData, setFormData] = useState({ user: '', password: '' });
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const navigate = useNavigate(); // Hook para redirigir
 
     const handleInputChange = (e) => {
@@ -14,10 +13,10 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { user, password } = formData;
+        const { email, password } = formData;
 
         // Validacion con usuario de prueba
-        if (user === 'test' && password === '123') {
+        if (email === 'test@test.cl' && password === '123') {
             toast.success("Inicio de sesión exitoso", {
               duration: 1500,
             })
@@ -32,41 +31,26 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <img src={MuniLogo} alt='logo' className="login-logo" />
-            <h1 className="login-title">MuniDenuncia</h1>
-
-            <form onSubmit={handleSubmit} className="login-form">
-                <h2 className="login-subtitle">Inciar sesión</h2>
-
-                <div style={{ position: 'relative' }}>
-                    <input 
-                        type="user" 
-                        name="user" 
-                        placeholder="Nombre de usuario" 
-                        onChange={handleInputChange} 
-                        required 
-                    />
-                    <label htmlFor="user">Nombre de usuario</label>
+        <div>
+            <h1 className="login-titulo">MuniDenuncia</h1>
+            <div className="login-container">
+                <div className="login-card">
+                    <h2>Iniciar Sesión</h2>
+                    <form onSubmit={handleSubmit}>
+                        <input type="email" name="email" placeholder="Correo Electrónico" onChange={handleInputChange} />
+                        <input type="password" name="password" placeholder="Contraseña" onChange={handleInputChange} />
+                        <button className="login-button" type="submit">Iniciar Sesión</button>
+                    </form>
                 </div>
-
-                <div style={{ position: 'relative' }}>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        placeholder="Contraseña" 
-                        onChange={handleInputChange} 
-                        required 
-                    />
-                    <label htmlFor="password">Contraseña</label>
+                
+                <div className="register-card">
+                    <h2>¿Eres nuevo en el sitio?</h2>
+                    <p>¡Registrate ya!</p>
+                    <Link to="/register">
+                        <button>Crear Cuenta</button>
+                    </Link>
                 </div>
-
-                <button type="submit" className="login-button">Ingresar</button>
-            </form>
-
-            <p className="register-link">
-                <Link to="/register" className="register-text">Regístrate aquí</Link>
-            </p>
+            </div>
         </div>
     );
 };

@@ -1,54 +1,124 @@
-import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
+import { useNavigate } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
+import { leerDesdeLocalStorage } from '../components/fileUtils';
 
-import redpin from "../assets/red_pin.png"; 
+import warningIcon from "../assets/megafono.png";
+import iconAuto from "../assets/icon_auto.png";
+import iconLadron from "../assets/icon_ladron.png";
+import iconPoste from "../assets/icon_poste.png";
+import iconSemaforo from "../assets/icon_semaforo.png";
 
-//Pin personalizado
-const customIcon = new L.Icon({
-  iconUrl: redpin,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
-});
+const icons2 = {
+  auto: new L.Icon({ iconUrl: iconAuto, iconSize: [32, 32], iconAnchor: [16, 16] }),
+  ladron: new L.Icon({ iconUrl: iconLadron, iconSize: [32, 32], iconAnchor: [16, 16] }),
+  poste: new L.Icon({ iconUrl: iconPoste, iconSize: [32, 32], iconAnchor: [16, 16] }),
+  semaforo: new L.Icon({ iconUrl: iconSemaforo, iconSize: [32, 32], iconAnchor: [16, 16] }),
+};
 
-//Localicaciones cercanas al Prestigio
-const locations = [
-  { lat: -33.5027, lng: -70.6132 }, // UTFSM San Joaquín
-  { lat: -33.5031, lng: -70.6115 }, // Punto cercano 1
-  { lat: -33.5042, lng: -70.6141 }, // Punto cercano 2
-  { lat: -33.5008, lng: -70.6127 }, // Punto cercano 3
-  { lat: -33.5015, lng: -70.6152 }, // Punto cercano 4
-  { lat: -33.5034, lng: -70.6109 }, // Punto cercano 5
-];
+const icons = {
+  auto: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconAuto}" class="icon" alt="Auto Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+  ladron: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconLadron}" class="icon" alt="Ladron Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+  poste: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconPoste}" class="icon" alt="Poste Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+  semaforo: new L.DivIcon({
+    className: "pin",
+    html: `<img src="${iconSemaforo}" class="icon" alt="Semaforo Icon"/>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  }),
+};
 
 function AddMarkers() {
   const map = useMap();
+  const navigate = useNavigate();
+  const locations = leerDesdeLocalStorage();
 
   useEffect(() => {
-    locations.forEach((location) => {
-      L.marker([location.lat, location.lng], { icon: customIcon }).addTo(map); 
+    // Limpia todos los marcadores existentes antes de añadir nuevos
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        map.removeLayer(layer);
+      }
     });
-  }, [map]);
+
+    locations.forEach((location) => {
+      const icon = icons[location.type] || icons["default"];
+      L.marker([location.lat, location.lng], { icon: icon })
+        .addTo(map)
+        .on("click", () => navigate(`/detalle/${location.id}`));
+    });
+  }, [map, navigate, locations]);
 
   return null;
 }
 
 function Maps() {
-  const position = [-33.5027, -70.6132]; //Prestigio
+  const [showIcons, setShowIcons] = useState(false);
+  const [currentPosition, setCurrentPosition] = useState([-33.5027, -70.6132]);
+  const navigate = useNavigate();
+
+  const handleMapMoveEnd = (map) => {
+    setCurrentPosition(map.getCenter());
+  };
+
+  const handleIconClick = (type) => {
+    navigate(`/NuevaAdvertencia/${type}`, { state: { currentPosition } });
+  };
+
+  const toggleIcons = () => {
+    setShowIcons((prev) => !prev);
+  };
 
   return (
     <MapContainer
-      center={position}
+      center={currentPosition}
       zoom={16}
-      style={{ height: "500px", width: "100%" }}
+      style={{ height: "650px", width: "100%" }}
+      whenCreated={(map) => {
+        map.on("moveend", () => handleMapMoveEnd(map));
+      }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <AddMarkers />
+      <div className="warnings-button-container">
+        {showIcons && (
+          <div className="warnings-icons">
+            {Object.keys(icons).map((type) => (
+              <img
+                key={type}
+                src={icons2[type].options.iconUrl}
+                alt={type}
+                onClick={() => handleIconClick(type)}
+                className="warning-icon"
+              />
+            ))}
+          </div>
+        )}
+        <div className="warning-icon-container" onClick={toggleIcons}>
+          <img src={warningIcon} alt="Advertencia" className="warning-icon" />
+          <div className="warning-label">Denuncia</div>
+        </div>
+      </div>
     </MapContainer>
   );
 }

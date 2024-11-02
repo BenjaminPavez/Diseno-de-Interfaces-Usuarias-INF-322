@@ -6,8 +6,10 @@ import LightbulbPage from '../pages/lightbulb_page';
 import Login from '../pages/login';
 
 import NavBar from '../components/nav_bar';
+import Detalle from '../pages/detalle'; 
 import Header from '../components/header';
 import Footer from '../components/footer';
+import NuevaAdvertencia from '../pages/NuevaAdvertencia'; 
 
 import { Toaster } from 'react-hot-toast';
 
@@ -31,9 +33,10 @@ const Layout = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/lightbulb' element={<LightbulbPage />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/detalle/:id' element={<Detalle />} /> 
+          <Route path='/NuevaAdvertencia/:type' element={<NuevaAdvertencia />} />
         </Routes>
       </div>
-      {!hideHeaderFooter && <Footer />}
     </div>
   );
 };
