@@ -29,13 +29,40 @@
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-align: center;
+    text-align: left;
+  }
+
+  &__info-item {
+    display: grid;
+    grid-template-columns: 80px auto;
+    align-items: center;
+    margin: 5px 0;
   }
 
   &__gravedad {
-    font-size: 16px;
     font-weight: bold;
     color: #222222;
+  }
+
+  &__gravedad.alta {
+    color: red; // Color para gravedad alta
+  }
+
+  &__gravedad.media {
+    color: rgb(255, 187, 0); // Color para gravedad media
+  }
+
+  &__gravedad.baja {
+    color: yellow; // Color para gravedad baja
+  }
+
+  &__info-label {
+    font-weight: bold;
+    color: #222222;
+  }
+
+  &__info-value {
+    color: #161616;
   }
 
   &__descripcion-container {
@@ -47,7 +74,7 @@
   }
 
   &__descripcion {
-    text-align: center;
+    text-align: justify;
     font-size: 15px;
     color: #222222;
     font-weight: bold;

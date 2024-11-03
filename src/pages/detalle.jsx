@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { leerDesdeLocalStorage, eliminarDeLocalStorage } from '../components/fileUtils';
+import L from 'leaflet';
 
 import iconAuto from "../assets/icon_auto.png";
 import iconLadron from "../assets/icon_ladron.png";
@@ -19,11 +20,14 @@ function Detalle() {
   const navigate = useNavigate();
   const locations = leerDesdeLocalStorage();
   const locationDetail = locations.find((loc) => loc.id === parseInt(id));
+  const [partesDireccion, setPartesDireccion] = useState([]);
+  const [gravedad, setGravedad] = useState('');
 
   if (!locationDetail) {
     return <div className="detalle">Ubicación no encontrada</div>;
   };
 
+  //Esto de aqui mira el tipo de denuncia
   const [tipo_denuncia, setTipo_denuncia] = useState(locationDetail.type);
 
   useEffect(() => {
@@ -45,13 +49,77 @@ function Detalle() {
     setTipo_denuncia(transformarTipoDenuncia(locationDetail.type));
   }, [locationDetail.type]);
 
+  //Esto de aqui saca la direccion
+
+  useEffect(() => {
+    if (locationDetail) {
+      const { lat, lng } = locationDetail;
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+        .then(response => response.json())
+        .then(data => {
+  
+          // Verifica si data.address esta definido
+          if (data.address) {
+            // Extrae campos de address que da el mapa
+            const comuna = data.address.city || data.address.town || data.address.village || data.address.neighbourhood || "Comuna no encontrada";
+            const calle = data.address.road || "Calle no encontrada";
+            const suburbio = data.address.suburb || "Suburbio no encontrado";
+            const region = data.address.state || "Región no encontrada";
+  
+            // Direccion completa
+            const direccionCompleta = `${calle}, ${suburbio ? suburbio + ', ' : ''}${comuna ? comuna + ', ' : ''}${region ? region + ', ' : ''}`;
+  
+            setPartesDireccion({
+              comuna,
+              direccion: direccionCompleta,
+              calle,
+              suburbio,
+              region
+            });
+          } else {
+            console.error("No se encontró la dirección en la respuesta.");
+          }
+        })
+        .catch(error => {
+          console.error("Error al obtener la dirección:", error);
+        });
+    }
+  }, [locationDetail]);
+
+  // Esto es para traducir la gravedad
+
+  useEffect(() => {
+    const transformarGravedad = (tipo) => {
+      switch (tipo) {
+        case "alto":
+          return "Alta";
+        case "medio":
+          return "Media";
+        default:
+          return "Baja";
+      }
+    };
+
+     setGravedad(transformarGravedad(locationDetail.severity));
+  }, [locationDetail.severity]);
+
   const handleDelete = () => {
     eliminarDeLocalStorage(locationDetail.id);
-    navigate("/"); // Redirige al usuario después de eliminar
+    navigate("/");
   };
 
   const handleBack = () => {
     navigate("/");
+  };
+
+  const getGravedadClass = (severity) => {
+    if (severity === 'alto') {
+      return 'detalle__gravedad alta'; // Clase para gravedad alta
+    } else if (severity === 'medio') {
+      return 'detalle__gravedad media'; // Clase para gravedad media
+    } else {
+      return 'detalle__gravedad baja'; // Clase para gravedad baja
+    }
   };
 
   return (
@@ -67,7 +135,18 @@ function Detalle() {
       <div className="detalle__info">
 
         <div className="detalle__gravedad-container">
-          <p className="detalle__gravedad">Gravedad: {locationDetail.severity}</p>
+          <div className="detalle__info-item">
+            <span className="detalle__info-label">Comuna:</span>
+            <span className="detalle__info-value">{partesDireccion.suburbio}</span>
+          </div>
+          <div className="detalle__info-item">
+            <span className="detalle__info-label">Dirección:</span>
+            <span className="detalle__info-value">{partesDireccion.calle}</span>
+          </div>
+          <div className="detalle__info-item">
+            <span className="detalle__gravedad">Gravedad:</span>
+            <span className={getGravedadClass(locationDetail.severity)}>{gravedad}</span>
+          </div>
         </div>
 
         <div className="detalle__descripcion-container">
