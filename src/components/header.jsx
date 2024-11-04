@@ -11,7 +11,9 @@ export const Header = () => {
           <img className='logo' src={MuniLogo} alt='logo' />
         </Link>
         <h1 className='layout__title'>MuniDenuncia</h1>
-        <img className='perfil' src={user} alt='perfil' />
+        <a href="/perfil">
+            <img className="perfil" src={user} alt="perfil" />
+        </a>
     </div>
   )
 }
