@@ -23,7 +23,7 @@
   
           &.move-to-center {
             transform: translateY(0) scale(1.2); // Aumenta el tamaño de la imagen al centrar
-            opacity: 0.7;
+            opacity: 1;
           }
         }
   
@@ -79,6 +79,8 @@
         width: 250px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        pointer-events: none;
+        outline: none;
       }
   
       button {

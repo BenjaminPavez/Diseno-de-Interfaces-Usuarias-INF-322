@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { leerDesdeLocalStorage } from '../components/fileUtils';
 import user from '../assets/user.png';
 import camaraIcon from '../assets/camara.png';
+import { toast } from 'react-hot-toast';
 
 function Perfil() {
   const navigate = useNavigate();
@@ -28,18 +29,12 @@ function Perfil() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSave = () => {
-    const usuarioActualizado = { nombre, correo, direccion };
-    localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
-    alert('Información actualizada con éxito');
-  };
-
   const handleCameraClick = () => {
+    toast("Próximamente en MuniDenuncia", {
+      icon: '🔥',
+      duration: 1500,
+    })
     setIsPopupVisible(true);
-  };
-
-  const handleClosePopup = () => {
-    setIsPopupVisible(false);
   };
 
   if (isLoading) {
