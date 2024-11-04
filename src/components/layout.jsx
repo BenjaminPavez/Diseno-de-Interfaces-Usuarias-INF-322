@@ -27,7 +27,6 @@ const Layout = () => {
     <div className='layout'>
       <Toaster />
       {!hideHeaderFooter && <Header />}
-      {!hideHeaderFooter && <NavBar />}
 
       <div className={pageClass}>
         <Routes>

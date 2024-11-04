@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { leerDesdeLocalStorage } from '../components/fileUtils';
 
-import iconMapa from "../assets/mapa.png";
+//import iconMapa from "../assets/mapa.png";
 // <img src={iconMapa} alt="Mapa" className="listado__mapa" />
 import iconAuto from "../assets/icon_auto.png";
 import iconLadron from "../assets/icon_ladron.png";
@@ -22,6 +22,7 @@ function Listado() {
   const [locationsWithDetails, setLocationsWithDetails] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Número de denuncias por página
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchAddresses = async () => {
@@ -45,6 +46,7 @@ function Listado() {
         })
       );
       setLocationsWithDetails(updatedLocations);
+      setIsLoading(false);
     };
 
     fetchAddresses();
@@ -55,7 +57,7 @@ function Listado() {
       case "alto":
         return "Alta"; 
       case "medio":
-        return "Media"; 
+        return "Media";
       default:
         return "Baja"; 
     }
@@ -83,25 +85,34 @@ function Listado() {
   return (
     <div className="listado">
       <div className="lista-text">Reportes</div>
-      {currentItems.map((location) => (
-        <div
-          key={location.id}
-          className="listado__item"
-          onClick={() => navigate(`/detalle/${location.id}`)}
-        >
-          <img src={icons[location.type]} alt={location.type} className="listado__icono" />
-          <div className="listado__info">
-            <span className="listado__layer-label">Dirección: </span> 
-            <p>{location.address}</p>
-            <p>
-              <span className="listado__layer-label">Gravedad: </span> 
-              <span className={`listado__gravedad ${transformarGravedad(location.severity)}`}>
-                {transformarGravedad(location.severity)}
-              </span>
-            </p>
-          </div>
+
+      {isLoading ? (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">Cargando...</p>
         </div>
-      ))}
+      ) : (
+        currentItems.map((location) => (
+          <div
+            key={location.id}
+            className="listado__item"
+            onClick={() => navigate(`/detalle/${location.id}`)}
+          >
+            <img src={icons[location.type]} alt={location.type} className="listado__icono" />
+            <div className="listado__info">
+              <span className="listado__layer-label">Dirección: </span>
+              <p>{location.address}</p>
+              <p>
+                <span className="listado__layer-label">Gravedad: </span> 
+                <span className={`listado__gravedad ${transformarGravedad(location.severity)}`}>
+                  {transformarGravedad(location.severity)}
+                </span>
+              </p>
+            </div>
+          </div>
+        ))
+      )}
+
       
       <div className="listado__footer">
         <button onClick={() => navigate('/')} className="listado__volver">

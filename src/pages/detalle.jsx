@@ -22,6 +22,7 @@ function Detalle() {
   const locationDetail = locations.find((loc) => loc.id === parseInt(id));
   const [partesDireccion, setPartesDireccion] = useState([]);
   const [gravedad, setGravedad] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   if (!locationDetail) {
     return <div className="detalle">Ubicación no encontrada</div>;
@@ -79,9 +80,11 @@ function Detalle() {
           } else {
             console.error("No se encontró la dirección en la respuesta.");
           }
+          setIsLoading(false);
         })
         .catch(error => {
           console.error("Error al obtener la dirección:", error);
+          setIsLoading(false);
         });
     }
   }, [locationDetail]);
@@ -135,18 +138,27 @@ function Detalle() {
       <div className="detalle__info">
 
         <div className="detalle__gravedad-container">
-          <div className="detalle__info-item">
-            <span className="detalle__info-label">Comuna:</span>
-            <span className="detalle__info-value">{partesDireccion.suburbio}</span>
-          </div>
-          <div className="detalle__info-item">
-            <span className="detalle__info-label">Dirección:</span>
-            <span className="detalle__info-value">{partesDireccion.calle}</span>
-          </div>
-          <div className="detalle__info-item">
-            <span className="detalle__gravedad">Gravedad:</span>
-            <span className={getGravedadClass(locationDetail.severity)}>{gravedad}</span>
-          </div>
+        {isLoading ? (
+            <div className="cargando-container">
+              <div className="cargando-spinner"></div>
+              <p className="cargando-text">Cargando dirección...</p>
+            </div>
+          ) : (
+            <>
+              <div className="detalle__info-item">
+                <span className="detalle__info-label">Comuna: </span>
+                <span className="detalle__info-value">{partesDireccion.suburbio}</span>
+              </div>
+              <div className="detalle__info-item">
+                <span className="detalle__info-label">Dirección: </span>
+                <span className="detalle__info-value">{partesDireccion.calle}</span>
+              </div>
+              <div className="detalle__gravedad">
+                <span className="detalle__info-label">Gravedad: </span>
+                <span className={getGravedadClass(locationDetail.severity)}>{gravedad}</span>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="detalle__descripcion-container">
