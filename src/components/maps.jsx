@@ -74,6 +74,7 @@ function Maps() {
   const [showIcons, setShowIcons] = useState(false);
   const [currentPosition, setCurrentPosition] = useState([-33.5027, -70.6132]);
   const navigate = useNavigate();
+  const [listaClass, setListaClass] = useState("1");
 
   const handleMapMoveEnd = (map) => {
     setCurrentPosition(map.getCenter());
@@ -85,6 +86,19 @@ function Maps() {
 
   const toggleIcons = () => {
     setShowIcons((prev) => !prev);
+    if(showIcons){
+      setListaClass("1");
+    } else {
+      setListaClass("2");
+    }
+  };
+
+  const getClassLista = (clase) => {
+    if (clase === '1') {
+      return 'lista-container1';
+    } 
+    
+    return 'lista-container2';
   };
 
   return (
@@ -102,7 +116,7 @@ function Maps() {
       />
       <AddMarkers />
       <div className="warnings-button-container">
-        <div>
+        <div className={getClassLista(listaClass)}>
           <img src={iconLista} alt="Lista de Puntos" className="icon-lista" onClick={() => navigate('/listado')}/>
           <div className="lista-text">Lista de<br></br> denuncias</div>
         </div>

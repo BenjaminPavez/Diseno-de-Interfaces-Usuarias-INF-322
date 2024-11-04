@@ -58,14 +58,21 @@ function Detalle() {
       fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
         .then(response => response.json())
         .then(data => {
+
+          const defaultValues = {
+            comuna: "Comuna no encontrada",
+            calle: "Calle no encontrada",
+            suburbio: "Suburbio no encontrado",
+            region: "Región no encontrada"
+          };
   
           // Verifica si data.address esta definido
           if (data.address) {
             // Extrae campos de address que da el mapa
-            const comuna = data.address.city || data.address.town || data.address.village || data.address.neighbourhood || "Comuna no encontrada";
-            const calle = data.address.road || "Calle no encontrada";
-            const suburbio = data.address.suburb || "Suburbio no encontrado";
-            const region = data.address.state || "Región no encontrada";
+            const comuna = data.address.city || data.address.town || data.address.village || data.address.neighbourhood || defaultValues.comuna;
+            const calle = data.address.road || defaultValues.calle;
+            const suburbio = data.address.suburb || defaultValues.suburbio;
+            const region = data.address.state || defaultValues.region;
   
             // Direccion completa
             const direccionCompleta = `${calle}, ${suburbio ? suburbio + ', ' : ''}${comuna ? comuna + ', ' : ''}${region ? region + ', ' : ''}`;
@@ -79,11 +86,18 @@ function Detalle() {
             });
           } else {
             console.error("No se encontró la dirección en la respuesta.");
+            setPartesDireccion(defaultValues);
           }
           setIsLoading(false);
         })
         .catch(error => {
           console.error("Error al obtener la dirección:", error);
+          setPartesDireccion({
+            comuna: "Comuna no encontrada",
+            calle: "Calle no encontrada",
+            suburbio: "Suburbio no encontrado",
+            region: "Región no encontrada"
+          });
           setIsLoading(false);
         });
     }

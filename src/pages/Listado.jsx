@@ -33,7 +33,7 @@ function Listado() {
             const data = await response.json();
             if (data.address) {
               const calle = data.address.road || "Calle no encontrada";
-              const suburbio = data.address.suburb || "";
+              const suburbio = data.address.suburb || "Comuna no encontrada";
               const comuna = data.address.city || data.address.town || data.address.village || data.address.neighbourhood || "Comuna no encontrada";
               const direccionCompleta = `${calle}, ${suburbio ? suburbio + ', ' : ''}${comuna}`;
               return { ...location, address: direccionCompleta };
