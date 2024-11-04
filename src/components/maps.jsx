@@ -10,6 +10,7 @@ import iconAuto from "../assets/icon_auto.png";
 import iconLadron from "../assets/icon_ladron.png";
 import iconPoste from "../assets/icon_poste.png";
 import iconSemaforo from "../assets/icon_semaforo.png";
+import iconLista from "../assets/lista.png";
 
 const icons2 = {
   auto: new L.Icon({ iconUrl: iconAuto, iconSize: [32, 32], iconAnchor: [16, 16] }),
@@ -73,6 +74,7 @@ function Maps() {
   const [showIcons, setShowIcons] = useState(false);
   const [currentPosition, setCurrentPosition] = useState([-33.5027, -70.6132]);
   const navigate = useNavigate();
+  const [listaClass, setListaClass] = useState("1");
 
   const handleMapMoveEnd = (map) => {
     setCurrentPosition(map.getCenter());
@@ -84,13 +86,26 @@ function Maps() {
 
   const toggleIcons = () => {
     setShowIcons((prev) => !prev);
+    if(showIcons){
+      setListaClass("1");
+    } else {
+      setListaClass("2");
+    }
+  };
+
+  const getClassLista = (clase) => {
+    if (clase === '1') {
+      return 'lista-container1';
+    } 
+    
+    return 'lista-container2';
   };
 
   return (
     <MapContainer
       center={currentPosition}
       zoom={16}
-      style={{ height: "692px", width: "100%" }}
+      style={{ height: "742px", width: "100%" }}
       whenCreated={(map) => {
         map.on("moveend", () => handleMapMoveEnd(map));
       }}
@@ -101,6 +116,10 @@ function Maps() {
       />
       <AddMarkers />
       <div className="warnings-button-container">
+        <div className={getClassLista(listaClass)}>
+          <img src={iconLista} alt="Lista de Puntos" className="icon-lista" onClick={() => navigate('/listado')}/>
+          <div className="lista-text">Lista de<br></br> denuncias</div>
+        </div>
         {showIcons && (
           <div className="warnings-icons">
             {Object.keys(icons).map((type) => (

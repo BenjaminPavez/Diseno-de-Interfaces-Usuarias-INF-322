@@ -1,4 +1,4 @@
-.pin {
+.markPin {
     position: relative;
     width: 40px; 
     height: 40px;
@@ -11,10 +11,10 @@
     font-size: 16px; 
     border: 2px solid #fff; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease;
+    cursor: grab;
   }
   
-  .pin::after {
+  .markPin::after {
     content: '';
     position: absolute;
     bottom: -15px; 
@@ -25,13 +25,4 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 15px solid #3498db; 
-  }
-
-  .pin:hover {
-    background-color: #2b7cb3;
-  }
-
-  .icon {
-    width: 24px;
-    height: 24px;
   }

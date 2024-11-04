@@ -10,6 +10,7 @@ import Detalle from '../pages/detalle';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import NuevaAdvertencia from '../pages/NuevaAdvertencia'; 
+import Listado from '../pages/Listado'
 
 import { Toaster } from 'react-hot-toast';
 
@@ -26,7 +27,6 @@ const Layout = () => {
     <div className='layout'>
       <Toaster />
       {!hideHeaderFooter && <Header />}
-      {!hideHeaderFooter && <NavBar />}
 
       <div className={pageClass}>
         <Routes>
@@ -35,6 +35,7 @@ const Layout = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/detalle/:id' element={<Detalle />} /> 
           <Route path='/NuevaAdvertencia/:type' element={<NuevaAdvertencia />} />
+          <Route path="/listado" element={<Listado />} />
         </Routes>
       </div>
     </div>

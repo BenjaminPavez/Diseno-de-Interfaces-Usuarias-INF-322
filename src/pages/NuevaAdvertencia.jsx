@@ -11,25 +11,25 @@ import iconSemaforo from "../assets/icon_semaforo.png";
 
 const icons = {
   auto: new L.DivIcon({
-    className: "pin",
+    className: "markPin",
     html: `<img src="${iconAuto}" class="icon" alt="Auto Icon"/>`,
     iconSize: [32, 32],
     iconAnchor: [16, 16],
   }),
   ladron: new L.DivIcon({
-    className: "pin",
+    className: "markPin",
     html: `<img src="${iconLadron}" class="icon" alt="Ladron Icon"/>`,
     iconSize: [32, 32],
     iconAnchor: [16, 16],
   }),
   poste: new L.DivIcon({
-    className: "pin",
+    className: "markPin",
     html: `<img src="${iconPoste}" class="icon" alt="Poste Icon"/>`,
     iconSize: [32, 32],
     iconAnchor: [16, 16],
   }),
   semaforo: new L.DivIcon({
-    className: "pin",
+    className: "markPin",
     html: `<img src="${iconSemaforo}" class="icon" alt="Semaforo Icon"/>`,
     iconSize: [32, 32],
     iconAnchor: [16, 16],
@@ -87,9 +87,9 @@ function NuevaAdvertencia() {
   };
 
   return (
-    <form onSubmit={handleAddLocation} className="advertencia-form">  
+    <form onSubmit={handleAddLocation} className="advertencia-form">
       <label className="advertencia-form__label">Ubicación</label>
-      <MapContainer center={position} zoom={16} style={{ height: "300px", width: "300px", marginBottom: "20px" }}>
+      <MapContainer center={position} zoom={16} style={{ height: "325px", width: "350px", marginBottom: "20px" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -112,7 +112,7 @@ function NuevaAdvertencia() {
       <label className="advertencia-form__label">Descripción:
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="advertencia-form__textarea" />
       </label>
-      <label className="advertencia-form__label">Gravedad:
+      <label className="advertencia-form__label">Gravedad: 
         <select value={severity} onChange={(e) => setSeverity(e.target.value)} className="advertencia-form__select">
           <option value="bajo">Bajo</option>
           <option value="medio">Medio</option>
