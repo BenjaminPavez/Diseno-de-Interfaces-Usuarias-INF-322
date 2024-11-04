@@ -106,6 +106,7 @@ function Maps() {
       center={currentPosition}
       zoom={16}
       style={{ height: "742px", width: "100%" }}
+      doubleClickZoom={false}
       whenCreated={(map) => {
         map.on("moveend", () => handleMapMoveEnd(map));
       }}
