@@ -1,0 +1,32 @@
+.layout_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #76A6E9;
+    height: 100px;
+    padding: 0 20px;
+
+    img {
+        height: 70px;
+        width: 70px;
+    }
+
+    .logo {
+        height: 70px;
+        width: 70px;
+        cursor: pointer;
+        transition: filter 0.3 ease;
+    }
+
+    .logo:hover {
+       filter: drop-shadow(
+        0 0 1px rgba(0, 0, 0, 0.8)
+       );
+    }
+
+    .perfil {
+        height: 50px;
+        width: 50px;
+        margin-left: auto;
+    }
+}
