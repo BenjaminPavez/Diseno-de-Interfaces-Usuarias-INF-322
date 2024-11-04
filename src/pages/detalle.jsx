@@ -58,7 +58,7 @@ function Detalle() {
       fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
         .then(response => response.json())
         .then(data => {
-
+        
           const defaultValues = {
             comuna: "Comuna no encontrada",
             calle: "Calle no encontrada",
