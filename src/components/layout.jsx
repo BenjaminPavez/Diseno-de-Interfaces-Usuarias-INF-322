@@ -12,6 +12,8 @@ import Footer from '../components/footer';
 import NuevaAdvertencia from '../pages/NuevaAdvertencia'; 
 import Listado from '../pages/Listado'
 
+import Perfil from '../pages/perfil'
+
 import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
@@ -36,6 +38,7 @@ const Layout = () => {
           <Route path='/detalle/:id' element={<Detalle />} /> 
           <Route path='/NuevaAdvertencia/:type' element={<NuevaAdvertencia />} />
           <Route path="/listado" element={<Listado />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </div>
     </div>
