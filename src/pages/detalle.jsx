@@ -185,7 +185,6 @@ function Detalle() {
         Volver
       </button>
 
-      <button onClick={handleDelete} className="detalle__eliminar-boton">Eliminar</button>
     </div>
   );
 }
