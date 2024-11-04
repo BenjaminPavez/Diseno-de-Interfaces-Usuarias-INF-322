@@ -4,6 +4,7 @@ import L from "leaflet";
 import { useNavigate } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
 import { leerDesdeLocalStorage } from '../components/fileUtils';
+import inicializarPuntosDePrueba from '../pages/puntosFijos';
 
 import warningIcon from "../assets/megafono.png";
 import iconAuto from "../assets/icon_auto.png";
@@ -49,6 +50,7 @@ const icons = {
 function AddMarkers() {
   const map = useMap();
   const navigate = useNavigate();
+  inicializarPuntosDePrueba();
   const locations = leerDesdeLocalStorage();
 
   useEffect(() => {
@@ -72,7 +74,7 @@ function AddMarkers() {
 
 function Maps() {
   const [showIcons, setShowIcons] = useState(false);
-  const [currentPosition, setCurrentPosition] = useState([-33.5027, -70.6132]);
+  const [currentPosition, setCurrentPosition] = useState([-33.5060, -70.6120]);
   const navigate = useNavigate();
   const [listaClass, setListaClass] = useState("1");
 
