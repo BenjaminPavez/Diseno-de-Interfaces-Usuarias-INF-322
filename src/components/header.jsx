@@ -1,21 +1,26 @@
-import React from 'react'
+// Header.jsx
+import React from 'react';
 import { Link } from 'react-router-dom';
+import MuniLogo from '../assets/icono.png';
+import menu from '../assets/menu.png';
 
-import MuniLogo from '../assets/icono.png'
-import user from '../assets/user.png'
+export const Header = ({ toggleSidebar }) => {
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    toggleSidebar();
+  };
 
-export const Header = () => {
   return (
     <div className='layout_header'>
-        <Link to="/">
-          <img className='logo' src={MuniLogo} alt='logo' />
-        </Link>
-        <h1 className='layout__title'>MuniDenuncia</h1>
-        <a href="/perfil">
-            <img className="perfil" src={user} alt="perfil" />
-        </a>
+      <div className="logo-container" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+        <img className='logo' src={menu} alt='logo' />
+      </div>
+      <h1 className='layout__title'>MuniDenuncia</h1>
+      <Link to="/">
+        <img className="perfil" src={MuniLogo} alt="perfil" />
+      </Link>
     </div>
-  )
-}
- 
-export default Header
+  );
+};
+
+export default Header;
