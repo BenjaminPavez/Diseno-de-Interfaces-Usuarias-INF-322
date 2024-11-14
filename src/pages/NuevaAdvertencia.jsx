@@ -42,7 +42,7 @@ function NuevaAdvertencia() {
   const { state } = useLocation();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [severity, setSeverity] = useState("bajo");
+  const [severity, setSeverity] = useState("Por definir");
   const [position, setPosition] = useState(state?.currentPosition);
   const [type, setType] = useState(initialType);
   const navigate = useNavigate();
@@ -55,6 +55,8 @@ function NuevaAdvertencia() {
   const handleAddLocation = (e) => {
     e.preventDefault();
 
+    setSeverity("Por Definir");
+
     const newLocation = {
       id: Date.now(),
       lat: position[0],
@@ -62,7 +64,7 @@ function NuevaAdvertencia() {
       type,
       title,
       description,
-      severity,
+      severity: "Por Definir",
     };
 
     const locations = leerDesdeLocalStorage();
@@ -111,13 +113,6 @@ function NuevaAdvertencia() {
       </div>
       <label className="advertencia-form__label">Descripción:
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="advertencia-form__textarea" />
-      </label>
-      <label className="advertencia-form__label">Gravedad: 
-        <select value={severity} onChange={(e) => setSeverity(e.target.value)} className="advertencia-form__select">
-          <option value="bajo">Bajo</option>
-          <option value="medio">Medio</option>
-          <option value="alto">Alto</option>
-        </select>
       </label>
       
       <div className="advertencia-form__buttons">

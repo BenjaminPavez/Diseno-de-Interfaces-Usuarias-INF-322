@@ -5,6 +5,8 @@ import user from '../assets/user.png';
 import camaraIcon from '../assets/camara.png';
 import { toast } from 'react-hot-toast';
 
+
+
 function Perfil() {
   const navigate = useNavigate();
   const [nombre, setNombre] = useState('');
@@ -43,6 +45,7 @@ function Perfil() {
 
   return (
     <div className="layout_perfil">
+      
       <div className="layout_perfil__header">
         <div 
           className={`profile-image-container`}
