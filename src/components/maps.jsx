@@ -121,7 +121,7 @@ function Maps() {
       <div className="warnings-button-container">
         <div className={getClassLista(listaClass)}>
           <img src={iconLista} alt="Lista de Puntos" className="icon-lista" onClick={() => navigate('/listado')}/>
-          <div className="lista-text">Lista de<br></br> denuncias</div>
+          <div className="lista-text">Denuncias<br></br> cercanas</div>
         </div>
         {showIcons && (
           <div className="warnings-icons">

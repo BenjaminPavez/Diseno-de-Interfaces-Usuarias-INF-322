@@ -84,7 +84,7 @@ function Listado() {
 
   return (
     <div className="listado">
-      <div className="lista-text">Reportes en tu comuna: San Joaquin</div>
+      <div className="lista-text">Denuncias en tu comuna: San Joaquin</div>
 
       {isLoading ? (
         <div className="loading-container">
