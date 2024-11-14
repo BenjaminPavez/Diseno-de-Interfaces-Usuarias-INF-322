@@ -12,16 +12,17 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     setIsSidebarOpen(false);
   };
 
-  const SidebarLink = ({ to, label }) => (
+  const SidebarLink = ({ to, onClick, label }) => (
     <li>
       <NavLink to={to} className={({ isActive }) => `nav-bar__link ${isActive ? 'nav-bar__link--active' : ''}`}
         onClick={closeSidebar}>
-        <span className="links">{label}</span>
+        <span onClick={onClick || null} className="links">{label}</span>
       </NavLink>
     </li>
   );
 
-  const handleClickWithPopup = () => {
+  const handleClickWithPopup = (e) => {
+    e.preventDefault();
     toast("Próximamente en MuniDenuncia", {
       icon: '🔥',
       duration: 1500,
@@ -65,11 +66,11 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <SidebarLink to="/" label="Mapa" />
           <SidebarLink to="/listado" label="Denuncias" />
 
-          <SidebarLink to="/listado" label="Mis Denuncias" />
-          <SidebarLink to="/listado" label="Ubicaciones favoritas" />
-          <SidebarLink to="/listado" label="Configuración" />
+          <SidebarLink to="#" onClick={handleClickWithPopup}  label="Mis Denuncias" />
+          <SidebarLink to="#" onClick={handleClickWithPopup} label="Ubicaciones favoritas" />
+          <SidebarLink to="#" onClick={handleClickWithPopup} label="Configuración" />
           
-          <SidebarLink to="/login" label="Cerrar Sesión" />
+          <SidebarLink to="#" onClick={handleClickWithPopup} label="Cerrar Sesión" />
         </ul>
       </div>
     </>
