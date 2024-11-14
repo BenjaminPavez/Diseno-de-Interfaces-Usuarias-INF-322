@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MuniLogo from '../assets/icono.png';
+import ususario from '../assets/user.png';
 import menu from '../assets/menu.png';
 
 export const Header = ({ toggleSidebar }) => {
@@ -16,8 +17,8 @@ export const Header = ({ toggleSidebar }) => {
         <img className='logo' src={menu} alt='logo' />
       </div>
       <h1 className='layout__title'>MuniDenuncia</h1>
-      <Link to="/">
-        <img className="perfil" src={MuniLogo} alt="perfil" />
+      <Link to="/perfil">
+        <img className="perfil" src={ususario} alt="perfil" />
       </Link>
     </div>
   );
