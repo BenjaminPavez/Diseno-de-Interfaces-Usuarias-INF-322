@@ -122,10 +122,19 @@
   
         &--active {
           background-color: rgba(255, 255, 255, 0.2);
+          width: 100%;
           border-radius: 8px;
           padding: 5px 10px;
         }
       }
     }
   }
+
+  .sidebar-icon {
+    width: 30px; /* Tamaño del ícono */
+    height: 30px;
+    margin-right: 8px; /* Espaciado entre ícono y texto */
+    vertical-align: middle; /* Alineación vertical */
+  }
+  
   

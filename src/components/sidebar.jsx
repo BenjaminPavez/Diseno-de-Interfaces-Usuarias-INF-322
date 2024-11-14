@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import user from '../assets/user.png';
 import menu from '../assets/menu.png';
+import mapa from '../assets/mapa.png';
+import lista from '../assets/lista.png';
+import pin from '../assets/pin.png';
+import config from '../assets/config.png';
+import salir from '../assets/salida.png';
 import appIcon from '../assets/icono.png';
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
@@ -12,7 +17,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     setIsSidebarOpen(false);
   };
 
-  const SidebarLink = ({ to, onClick, label }) => (
+  const SidebarLink = ({ to, onClick, label, icon}) => (
     <li>
       <NavLink 
         to={onClick ? null : to}
@@ -21,6 +26,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         }
         onClick={closeSidebar}
       >
+        {icon && <img src={icon} alt="" className="sidebar-icon" />}
         <span onClick={onClick || null} className="links">{label}</span>
       </NavLink>
     </li>
@@ -69,14 +75,13 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         </div>
 
         <ul className="nav-container">
-          <SidebarLink to="/" label="Mapa" />
-          <SidebarLink to="/listado" label="Denuncias" />
+          <SidebarLink to="/" label="Mapa" icon={mapa}/>
+          <SidebarLink to="/listado" label="Denuncias cercanas" icon={lista}/>
 
-          <SidebarLink to="#" onClick={handleClickWithPopup}  label="Mis Denuncias" />
-          <SidebarLink to="#" onClick={handleClickWithPopup} label="Ubicaciones favoritas" />
-          <SidebarLink to="#" onClick={handleClickWithPopup} label="Configuración" />
+          <SidebarLink to="#" onClick={handleClickWithPopup} label="Ubicaciones favoritas" icon={pin}/>
+          <SidebarLink to="#" onClick={handleClickWithPopup} label="Configuración" icon={config}/>
           
-          <SidebarLink to="#" onClick={handleClickWithPopup} label="Cerrar Sesión" />
+          <SidebarLink to="#" onClick={handleClickWithPopup} label="Cerrar sesión" icon={salir}/>
         </ul>
       </div>
     </>
