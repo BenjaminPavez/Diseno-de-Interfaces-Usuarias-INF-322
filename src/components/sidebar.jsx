@@ -14,11 +14,17 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
   const SidebarLink = ({ to, onClick, label }) => (
     <li>
-      <NavLink to={to} className={({ isActive }) => `nav-bar__link ${isActive ? 'nav-bar__link--active' : ''}`}
-        onClick={closeSidebar}>
+      <NavLink 
+        to={onClick ? null : to}
+        className={({ isActive }) => 
+          `nav-bar__link ${isActive && !onClick ? 'nav-bar__link--active' : ''}`
+        }
+        onClick={closeSidebar}
+      >
         <span onClick={onClick || null} className="links">{label}</span>
       </NavLink>
     </li>
+
   );
 
   const handleClickWithPopup = (e) => {
