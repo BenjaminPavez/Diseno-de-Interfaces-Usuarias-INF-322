@@ -58,8 +58,10 @@ function Listado() {
         return "Alta"; 
       case "medio":
         return "Media";
+      case "baja":
+        return "Baja";
       default:
-        return "Baja"; 
+        return "Por Definir"; 
     }
   };
 
