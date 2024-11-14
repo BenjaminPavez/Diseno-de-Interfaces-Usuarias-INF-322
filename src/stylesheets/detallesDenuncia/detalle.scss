@@ -56,6 +56,10 @@
     color: yellow; // Color para gravedad baja
   }
 
+  &__gravedad.porDefinir {
+    color: black; // Color para gravedad baja
+  }
+
   &__info-label {
     font-weight: bold;
     color: #222222;

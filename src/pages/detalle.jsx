@@ -112,8 +112,10 @@ function Detalle() {
           return "Alta";
         case "medio":
           return "Media";
-        default:
+        case "baja":
           return "Baja";
+        default:
+          return "Por Definir"
       }
     };
 
@@ -134,6 +136,8 @@ function Detalle() {
       return 'detalle__gravedad alta'; // Clase para gravedad alta
     } else if (severity === 'medio') {
       return 'detalle__gravedad media'; // Clase para gravedad media
+    } else if (severity == 'Por Definir'){
+      return 'detalle__gravedad porDefinir'; // Clase para gravedad baja
     } else {
       return 'detalle__gravedad baja'; // Clase para gravedad baja
     }
