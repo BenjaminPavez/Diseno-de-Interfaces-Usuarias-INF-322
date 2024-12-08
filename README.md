@@ -10,7 +10,7 @@ Este proyecto se centra en la participación ciudadana y está pensado para inte
 
 # Requerimientos e Inicio
 
-Fronted de MVP de la aplicación MuniDenuncia.
+Frontend de MVP de la aplicación MuniDenuncia.
 
 ### Requerimientos
 
